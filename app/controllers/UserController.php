@@ -11,15 +11,17 @@ class UserController extends \BaseController {
 	{
 		$users = array();
 
-		for($i = 0; $i < 4; $i++){
+		for($i = 1; $i < 4; $i++){
 			$user = new StdClass();
 
-			$user->email = "$user{$i}@tutsplus.com";
+			$user->email = "user{$i}@tutsplus.com";
+
+			//encrypted password
 			$user->password = Hash::make("MyPassword{$i}");
 			$users[] = $user;
 		}
 
-		return View::make('user.index', compact($users));
+		return View::make('user.index', compact('users'));
 	}
 
 
@@ -53,7 +55,14 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $user = new StdClass();
+
+        $user->email = "user@tutsplus.com";
+
+        //encrypted password
+        $user->password = Hash::make("MyPassword2345");
+
+        return View::make('user.show', compact('user'));
 	}
 
 
@@ -78,6 +87,8 @@ class UserController extends \BaseController {
 	public function update($id)
 	{
 		//
+
+
 	}
 
 
