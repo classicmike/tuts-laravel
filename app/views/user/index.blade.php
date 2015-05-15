@@ -2,7 +2,7 @@
 @section('content')
     @if(count($users))
         @foreach($users as $user)
-            <p>{{{ $user->email or 'default value' }}}</p>
+            <p><strong>{{{ $user->title }}}</strong> {{{ $user->email }}}</p>
         @endforeach
     @endif
 @stop

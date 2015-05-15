@@ -9,17 +9,27 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = array();
+		//$users = DB::table('users')->where('id', 1)->orWhere('id', 2)->get();
 
-		for($i = 1; $i < 4; $i++){
-			$user = new StdClass();
 
-			$user->email = "user{$i}@tutsplus.com";
+		/*dd(DB::table('users')->max('permission'));
+		dd(DB::table('users')->lists('email', 'id'));
+		dd(DB::table('users')->count());*/
+        /*$users = DB::table('users')->where('id', 1)->orWhere('id', 2)->get();*/
 
-			//encrypted password
-			$user->password = Hash::make("MyPassword{$i}");
-			$users[] = $user;
-		}
+        //$users = DB::table('users')->where('id', '>', 1)->orderBy('email', 'desc')->take(2)->skip(0)->get();
+        $users = DB::table('users')->join('posts', 'users.id', '=', 'posts.user_id')->get();
+
+        $data = array(
+            'email' => 'some22@email.com',
+            'password' => Hash::make('12345'),
+            'permission' => 1
+        );
+
+        //DB::table('users')->insert($data);
+
+        DB::table('users')->where('id', 3)->update($data);
+        DB::table('users')->where('id', 3)->delete();
 
 		return View::make('user.index', compact('users'));
 	}
@@ -33,6 +43,7 @@ class UserController extends \BaseController {
 	public function create()
 	{
 		//
+        echo Hash::make('mike');
 	}
 
 
@@ -55,12 +66,8 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        $user = new StdClass();
 
-        $user->email = "user@tutsplus.com";
-
-        //encrypted password
-        $user->password = Hash::make("MyPassword2345");
+        $user = DB::table('users')->where('email', 'mike.tran@leafuctter.com.au')->first();
 
         return View::make('user.show', compact('user'));
 	}
