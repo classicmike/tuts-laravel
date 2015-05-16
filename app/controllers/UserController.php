@@ -55,7 +55,9 @@ class UserController extends \BaseController {
 	public function store()
 	{
 		//
-	}
+        $validator = Validator::make(Input::all(), User::$rules);
+
+    }
 
 
 	/**
@@ -97,6 +99,13 @@ class UserController extends \BaseController {
 	public function update($id)
 	{
 		//
+
+        $validator = Validator::make(Input::all(), User::$rules);
+
+        if($validator->fails()){
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
         dd(Input::all());
 
 	}
