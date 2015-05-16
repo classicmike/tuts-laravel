@@ -8,7 +8,8 @@
 
 class PostController extends BaseController {
     public function listing(){
-        $posts = Post::where('title', 'LIKE', '%post%')->take(1)->skip(1)->get();
+        $posts = Post::with('user')->get();
+
         return View::make('post.listing', compact('posts'));
     }
 

@@ -67,7 +67,7 @@ class UserController extends \BaseController {
 	public function show($id)
 	{
 
-        $user = DB::table('users')->where('email', 'mike.tran@leafuctter.com.au')->first();
+        $user = User::with('Categories')->find($id);
 
         return View::make('user.show', compact('user'));
 	}
