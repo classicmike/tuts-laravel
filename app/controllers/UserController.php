@@ -82,6 +82,9 @@ class UserController extends \BaseController {
 	public function edit($id)
 	{
 		//
+
+        $user = User::find($id);
+        return View::make('user.edit', compact('user'));
 	}
 
 
@@ -94,7 +97,7 @@ class UserController extends \BaseController {
 	public function update($id)
 	{
 		//
-
+        dd(Input::all());
 
 	}
 
